@@ -40,7 +40,7 @@ if (arr[0] != NULL)
 			if (execve(arr[0], arr, NULL) == -1)
 			{
 				error_message(arr, argv);
-				exit(2);
+				exit(EXIT_FAILURE);
 			}
 		}
 		else
