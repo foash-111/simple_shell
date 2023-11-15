@@ -29,7 +29,6 @@ if (arr[0] != NULL)
 	error_message(arr, argv);
 	free_all_array(arr);
 	free(str);
-	exit(127);
 	}
 	else
 	{
