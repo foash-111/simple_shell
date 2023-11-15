@@ -27,6 +27,6 @@ extern char **environ;
 void error_message(char **arr, char **argv);
 int env_command(char **arr, char **env);
 
-int exit_command(char *str);
+int exit_command(char *str, char **arr);
 
 #endif

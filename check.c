@@ -5,10 +5,9 @@
  * @arr: array of arguments passed from tokanize
  * Return: exit statues or 0 in failure
 */
-int exit_command(char *str)
+int exit_command(char *str, char **arr)
 {
 	int i = 0;
-	char **arr = tokanized_array(str);
 
 	if (strcmp(arr[0], "exit") == 0)
 {
@@ -19,7 +18,6 @@ free_all_array(arr);
 free(str);
 	exit(i);
 }
-free_all_array(arr);
 return (0);
 }
 
@@ -112,6 +110,6 @@ void free_all_array(char **arr)
 		free(arr[i]);
 		i++;
 	}
-	
+
 	free(arr);
 }

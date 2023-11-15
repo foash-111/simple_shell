@@ -29,7 +29,7 @@ void interactive_mode(char **argv, char **env)
 			eljoker(str, argv, env);
 			free(str);
 			str = NULL;
-			
+
 	}
 
 }
@@ -64,7 +64,7 @@ continue;
 	eljoker(str, argv, env);
 	free(str);
 	str = NULL;
-	
+
 }
 
 
