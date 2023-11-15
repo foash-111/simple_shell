@@ -52,5 +52,4 @@ if (arr[0] != NULL)
 	{
 	free(arr[0]);
 	free(arr);
-	 }
-}
+	} }

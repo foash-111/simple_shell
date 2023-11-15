@@ -2,6 +2,7 @@
 
 /**
  * exit_command - exit_command
+ * @str: buffer input
  * @arr: array of arguments passed from tokanize
  * Return: exit statues or 0 in failure
 */
@@ -48,6 +49,7 @@ return (0);
 /**
  * check_exit_env - check_exit_env
  * @arr: array of arguments passed from tokanize
+ * @line: buffer input
  * Return: exit statues with 2 if we find env or exit with path
  * because they are bulit in command they have not a path
 */
