@@ -28,7 +28,6 @@ if (arr[0] != NULL)
 	{
 	error_message(arr, argv);
 	free_all_array(arr);
-	free(str);
 	}
 	else
 	{
@@ -51,7 +50,7 @@ if (arr[0] != NULL)
 	} }
 	else
 	{
-	 free(arr[0]);
-	 free(arr);
+	free(arr[0]);
+	free(arr);
 	 }
 }
