@@ -11,7 +11,7 @@ void interactive_mode(char **argv, char **env)
 {
 	size_t in_len = 0;
 	char *str = NULL;
-	int reads_chars;
+	int reads_chars, status = 0, temp = 0;
 
 	while (1)
 	{
@@ -22,16 +22,27 @@ void interactive_mode(char **argv, char **env)
 		if (reads_chars == -1)
 		{
 		free(str);
-		exit(EXIT_SUCCESS);
+		break;
 		}
 			str[reads_chars - 1] = '\0';
 
-			eljoker(str, argv, env);
+			status = eljoker(str, argv, env);
+			if (strncmp(str, "exit", 4) == 0)
+			{
+				free(str);
+				str = NULL;
+				if ((status != temp) && (status != 0))
+				{
+				temp = status;
+				}
+				exit(temp);
+				exit(status);
+			}
 			free(str);
 			str = NULL;
-
+			temp = status;
 	}
-
+	exit(temp);
 }
 
 /**
@@ -44,7 +55,7 @@ void non_interactive_mode(char **argv, char **env)
 {
 	size_t in_len = 0;
 	char *str;
-	int reads_chars;
+	int reads_chars, status = 0, temp = 0;
 while (1)
 {
 	reads_chars = getline(&str, &in_len, stdin);
@@ -52,7 +63,7 @@ while (1)
 	if (reads_chars == -1)
 	{
 		free(str);
-		return;
+		break;
 	}
 
 if (str[0] == '\n')
@@ -61,13 +72,24 @@ continue;
 	if (str[reads_chars - 1] == '\n')
 	str[reads_chars - 1] = '\0';
 
-	eljoker(str, argv, env);
+	status = eljoker(str, argv, env);
+
+		if (strncmp(str, "exit", 4) == 0)
+		{
+		free(str);
+		str = NULL;
+		if ((status != temp) && (status != 0))
+		{
+		temp = status;
+		}
+		exit(temp);
+		}
 	free(str);
 	str = NULL;
 
 }
 
-
+exit(status);
 }
 
 /**

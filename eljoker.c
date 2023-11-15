@@ -9,26 +9,28 @@
  * @str: string we read
  * @argv:  array of pointers to the arguments
  * @env: array of pointers to the environment variables
- * Retuen: nothing
+ * Return: value that will pSSED TO EXIT
 */
-void eljoker(char *str, char **argv, char **env)
+int eljoker(char *str, char **argv, char **env)
 {
-	char **arr = tokanized_array(str);
-	char *command_with_path;
+	char **arr = tokanized_array(str), *command_with_path;
 	pid_t pid = 0;
+	int status = 0, child_status;
 
 if (arr[0] != NULL)
 {
-	if (exit_command(str, arr) || env_command(arr, env))
-	return;
-	check_exit_env(arr, str);
-
+	status = exit_command(arr);
+	if (status >= 0)
+	return (status);
+	if (env_command(arr, env) == 0)
+	return (0);
+	else if (check_exit_env(arr, str) == 2)
+	return (2);
 	command_with_path = complete_path(arr[0]);
 	if (command_with_path == NULL)
 	{
-	error_message(arr, argv);
-	free_all_array(arr);
-	}
+	error_message(arr, argv), free_all_array(arr);
+	return (127); }
 	else
 	{
 		free(arr[0]);
@@ -38,18 +40,16 @@ if (arr[0] != NULL)
 		{
 			if (execve(arr[0], arr, NULL) == -1)
 			{
-				error_message(arr, argv);
-				free_all_array(arr);
-				exit(EXIT_FAILURE);
-			} }
+				exit(EXIT_FAILURE); } }
 		else
 		{
-			wait(NULL);
+			 wait(&child_status);
+		if (WIFEXITED(child_status) && WEXITSTATUS(child_status) != 0)
+		{
+			free_all_array(arr), free(command_with_path);
+			return (WEXITSTATUS(child_status)); }
 			free_all_array(arr); }
-	free(command_with_path);
-	} }
+	free(command_with_path); } }
 	else
-	{
-	free(arr[0]);
-	free(arr);
-	} }
+	free_all_array(arr);
+	return (0); }
