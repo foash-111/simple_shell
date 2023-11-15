@@ -5,9 +5,10 @@
  * @arr: array of arguments passed from tokanize
  * Return: exit statues or 0 in failure
 */
-int exit_command(char **arr)
+int exit_command(char *str)
 {
 	int i = 0;
+	char **arr = tokanized_array(str);
 
 	if (strcmp(arr[0], "exit") == 0)
 {
@@ -15,8 +16,10 @@ int exit_command(char **arr)
 	if (arr[1] != NULL)
 	i = atoi(arr[1]);
 free_all_array(arr);
+free(str);
 	exit(i);
 }
+free_all_array(arr);
 return (0);
 }
 
@@ -50,7 +53,7 @@ return (0);
  * Return: exit statues with 2 if we find env or exit with path
  * because they are bulit in command they have not a path
 */
-void check_exit_env(char **arr)
+void check_exit_env(char **arr, char *line)
 {
 	char *ptr, *str = strdup(arr[0]);
 	int i = 0;
@@ -62,6 +65,7 @@ void check_exit_env(char **arr)
 		{
 		free(str);
 		free_all_array(arr);
+		free(line);
 		exit(2);
 		}
 		ptr = strtok(NULL, "/");
@@ -108,5 +112,6 @@ void free_all_array(char **arr)
 		free(arr[i]);
 		i++;
 	}
+	
 	free(arr);
 }

@@ -10,7 +10,7 @@
 void interactive_mode(char **argv, char **env)
 {
 	size_t in_len = 0;
-	char *str;
+	char *str = NULL;
 	int reads_chars;
 
 	while (1)
@@ -28,6 +28,8 @@ void interactive_mode(char **argv, char **env)
 
 			eljoker(str, argv, env);
 			free(str);
+			str = NULL;
+			
 	}
 
 }
@@ -61,6 +63,8 @@ continue;
 
 	eljoker(str, argv, env);
 	free(str);
+	str = NULL;
+	
 }
 
 

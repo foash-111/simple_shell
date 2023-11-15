@@ -19,15 +19,16 @@ void eljoker(char *str, char **argv, char **env)
 
 if (arr[0] != NULL)
 {
-	if (exit_command(arr) || env_command(arr, env))
+	if (exit_command(str) || env_command(arr, env))
 	return;
-	check_exit_env(arr);
+	check_exit_env(arr, str);
 
 	command_with_path = complete_path(arr[0]);
 	if (command_with_path == NULL)
 	{
 	error_message(arr, argv);
 	free_all_array(arr);
+	free(str);
 	exit(127);
 	}
 	else
@@ -40,6 +41,7 @@ if (arr[0] != NULL)
 			if (execve(arr[0], arr, NULL) == -1)
 			{
 				error_message(arr, argv);
+				free(str);
 				exit(EXIT_FAILURE);
 			}
 		}
