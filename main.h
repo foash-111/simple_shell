@@ -30,8 +30,12 @@ void free_all_array(char **arr);
 extern char **environ;
 
 void error_message(char **arr, char **argv);
+void exit_error_message(char **arr, char **argv);
+void print_number(int n);
+
+
 int env_command(char **arr, char **env);
 
-int exit_command(char **arr);
+int exit_command(char **arr, char **argv);
 
 #endif
