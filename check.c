@@ -17,7 +17,10 @@ if (arr[1] != NULL && arr[2] == NULL)
 {
 i = _atoi(arr[1]);
 if (_strcmp(arr[1], "0") == 0)
-{ exit(0); }
+{ 
+	free_all_array(arr);
+	exit(0); 
+}
 else if (i <= 0)
 {
 exit_error_message(arr, argv, arr[1]);
