@@ -66,26 +66,29 @@ while (1)
 		break;
 	}
 
-if (str[0] == '\n')
+if (_strcmp(str, "\n") == 0)
+{
+free(str);
 continue;
-
+}
 	if (str[reads_chars - 1] == '\n')
 	str[reads_chars - 1] = '\0';
 
 	status = eljoker(str, argv, env);
-
-		if (_strncmp(str, "exit", 4) == 0)
-		{
-		free(str);
-		str = NULL;
-		if ((status != temp) && (status != 0))
-		{
-		temp = status;
-		}
-		exit(temp);
-		}
-	free(str);
-	str = NULL;
+			if (_strncmp(str, "exit", 4) == 0)
+			{
+				free(str);
+				str = NULL;
+				if ((status != temp) && (status != 0))
+				{
+				temp = status;
+				}
+				exit(temp);
+				exit(status);
+			}
+			free(str);
+			str = NULL;
+			temp = status;
 
 }
 
