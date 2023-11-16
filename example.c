@@ -54,7 +54,7 @@ void interactive_mode(char **argv, char **env)
 void non_interactive_mode(char **argv, char **env)
 {
 	size_t in_len = 0;
-	char *str;
+	char *str = NULL;
 	int reads_chars, status = 0, temp = 0;
 while (1)
 {
