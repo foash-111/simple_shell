@@ -37,6 +37,6 @@ int comma(char *str, char **argv, char **env);
 
 int env_command(char **arr, char **env);
 
-int exit_command(char **arr, char **argv);
+int exit_command(char **arr);
 
 #endif

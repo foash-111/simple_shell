@@ -3,33 +3,12 @@
 /**
  * exit_command - exit_command
  * @arr: array of arguments passed from tokanize
- * @argv:  array of pointers to the arguments
  * Return: exit statues or 0 in failure
 */
-int exit_command(char **arr, char **argv)
+int exit_command(char **arr)
 {
-	int i = 0;
-
 if (_strcmp(arr[0], "exit") == 0)
 {
-
-if (arr[1] != NULL && arr[2] == NULL)
-{
-i = _atoi(arr[1]);
-if (_strcmp(arr[1], "0") == 0)
-{
-	free_all_array(arr);
-	exit(0);
-}
-else if (i <= 0)
-{
-exit_error_message(arr, argv, arr[1]);
-free_all_array(arr);
-exit(2);
-}
-exit(i);
-}
-
 return (0);
 }
 return (-1);
