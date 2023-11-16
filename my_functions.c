@@ -5,6 +5,7 @@
  * because it's said printf isn't allowed
  * @arr: array of pointers to the commands
  * @argv:  array of pointers to the arguments
+ * @arr1: sentece
  * Retuen: nothing
 */
 void exit_error_message(char **arr, char **argv, char *arr1)
