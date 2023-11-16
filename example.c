@@ -66,11 +66,6 @@ while (1)
 		break;
 	}
 
-if (_strcmp(str, "\n") == 0)
-{
-free(str);
-continue;
-}
 	if (str[reads_chars - 1] == '\n')
 	str[reads_chars - 1] = '\0';
 
