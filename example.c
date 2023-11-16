@@ -76,7 +76,7 @@ while (1)
 
 		while (str[i])
 		{
-		if (str[i] == '#')
+		if (str[0] == '#' || (str[i] == '#' && str[i - 1] == ' '))
 		{
 		str[i] = ' ';
 		if (str[i + 1] != '\0')
