@@ -8,9 +8,14 @@
 #include<fcntl.h>
 #include<string.h>
 #include <sys/wait.h>
+#include<stdbool.h>
 void interactive_mode(char **argv, char **env);
 void non_interactive_mode(char **argv, char **env);
-
+int _strlen(const char *s);
+int _strcmp(char *s1, char *s2);
+int _strncmp(const char *s1, const char *s2, int n);
+char *_strdup(char *str);
+int _atoi(char *s);
 
 int _putchar(char c);
 char *_getenv(const char *name);

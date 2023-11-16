@@ -34,7 +34,7 @@ if (arr[0] != NULL)
 	else
 	{
 		free(arr[0]);
-		arr[0] = strdup(command_with_path);
+		arr[0] = _strdup(command_with_path);
 		pid = fork();
 		if (pid == 0)
 		{

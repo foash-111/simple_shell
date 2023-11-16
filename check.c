@@ -9,11 +9,11 @@ int exit_command(char **arr)
 {
 	int i = 0;
 
-	if (strcmp(arr[0], "exit") == 0)
+	if (_strcmp(arr[0], "exit") == 0)
 {
 
-	if (arr[1] != NULL)
-	i = atoi(arr[1]);
+	if (arr[1] != NULL && arr[2] == NULL)
+	i = _atoi(arr[1]);
 free_all_array(arr);
 	return (i);
 }
@@ -30,11 +30,11 @@ int env_command(char **arr, char **env)
 {
 	 int i = 0;
 
-if (strcmp(arr[0], "env") == 0)
+if (_strcmp(arr[0], "env") == 0)
 {
 	while (env[i] != NULL)
 	{
-		write(STDOUT_FILENO, env[i], strlen(env[i]));
+		write(STDOUT_FILENO, env[i], _strlen(env[i]));
 		_putchar('\n');
 		i++;
 	}
@@ -53,13 +53,13 @@ return (-1);
 */
 int check_exit_env(char **arr, char *line)
 {
-	char *ptr, *str = strdup(arr[0]);
+	char *ptr, *str = _strdup(arr[0]);
 	int i = 0;
 
 	ptr = strtok(str, "/");
 	while (ptr != NULL)
 	{
-		if (strcmp(ptr, "exit") == 0 || strcmp(ptr, "env") == 0)
+		if (_strcmp(ptr, "exit") == 0 || _strcmp(ptr, "env") == 0)
 		{
 		free(str);
 		free_all_array(arr);
@@ -88,7 +88,7 @@ void error_message(char **arr, char **argv)
 	first_part = str_concat(argv[0], ": 1: ");
 	second_part = str_concat(first_part, arr[0]);
 	error_message = str_concat(second_part, ": not found\n");
-	write(STDERR_FILENO, error_message, strlen(error_message));
+	write(STDERR_FILENO, error_message, _strlen(error_message));
 
 	free(first_part);
 	free(second_part);

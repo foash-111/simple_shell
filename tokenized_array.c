@@ -12,7 +12,7 @@ char **tokanized_array(char *str)
 	char *dub, *ptr;
 	int i = 0;
 
-	 dub = strdup(str);
+	 dub = _strdup(str);
 
 	ptr = strtok(str, " \n\t");
 	while (ptr != NULL)
@@ -34,7 +34,7 @@ i = 0;
 ptr = strtok(dub, " \n\t");
 while (ptr)
 {
-	arr[i] = strdup(ptr);
+	arr[i] = _strdup(ptr);
 	ptr = strtok(NULL, " \n\t");
 	i++;
 }

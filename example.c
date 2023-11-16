@@ -27,7 +27,7 @@ void interactive_mode(char **argv, char **env)
 			str[reads_chars - 1] = '\0';
 
 			status = eljoker(str, argv, env);
-			if (strncmp(str, "exit", 4) == 0)
+			if (_strncmp(str, "exit", 4) == 0)
 			{
 				free(str);
 				str = NULL;
@@ -74,7 +74,7 @@ continue;
 
 	status = eljoker(str, argv, env);
 
-		if (strncmp(str, "exit", 4) == 0)
+		if (_strncmp(str, "exit", 4) == 0)
 		{
 		free(str);
 		str = NULL;

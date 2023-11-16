@@ -9,12 +9,12 @@
 char *_getenv(const char *name)
 {
 	char **env = environ;
-	int len = strlen(name);
+	int len = _strlen(name);
 	int i = 0;
 
 	while (env[i])
 	{
-		if (strncmp(env[i], name, len) == 0 && env[i][len] == '=')
+		if (_strncmp(env[i], name, len) == 0 && env[i][len] == '=')
 		{
 			return (env[i] + len + 1);
 		}
@@ -34,13 +34,10 @@ char *complete_path(char *command)
 {
 	char *path;
 	char *token, *complete_path, *fixed_path;
-	char *copied_path, *check_command;
+	char *copied_path, *check_command = _strdup(command);
 
-	if ((access(command, X_OK) == 0))
-		return (strdup(command));
-
-	check_command = strdup(command);
-	free(check_command);
+	if (access(command, F_OK) == 0 && (access(command, X_OK) == 0))
+		return (check_command);
 
 	path = _getenv("PATH");
 	if (command == NULL || path == NULL)
@@ -52,10 +49,10 @@ char *complete_path(char *command)
 	while (token)
 	{
 		fixed_path = str_concat(token, "/");
-		complete_path =  str_concat(fixed_path, command);
+		complete_path =  str_concat(fixed_path, check_command);
 		free(fixed_path);
 
-		if (access(complete_path, X_OK) == 0)
+	if (access(complete_path, F_OK) == 0 && access(complete_path, X_OK) == 0)
 		{
 		free(copied_path);
 		return (complete_path);
@@ -69,5 +66,6 @@ char *complete_path(char *command)
 	}
 
 free(copied_path);
+free(check_command);
 return (NULL);
 }
