@@ -3,12 +3,40 @@
 /**
  * exit_command - exit_command
  * @arr: array of arguments passed from tokanize
+ * @argv: array of arguments passed from cmd
  * Return: exit statues or 0 in failure
 */
-int exit_command(char **arr)
+int exit_command(char **arr, char **argv)
 {
+	int i = 0;
 if (_strcmp(arr[0], "exit") == 0)
 {
+if (arr[1])
+{
+if (_strcmp(arr[1], "0") == 0)
+{
+free_all_array(arr);
+exit(0);
+}
+else
+{
+i = _atoi(arr[1]);
+if (i > 0)
+{
+free_all_array(arr);
+exit(i);
+}
+else
+{
+	write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+	write(2, ": 1: exit: Illegal number: ", 27);
+	write(STDERR_FILENO, arr[1], _strlen(arr[1]));
+	write(STDERR_FILENO, "\n", 1);
+	free_all_array(arr);
+	exit(2);
+}
+}
+}
 free_all_array(arr);
 return (0);
 }

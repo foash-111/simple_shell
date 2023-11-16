@@ -19,7 +19,7 @@ int eljoker(char *str, char **argv, char **env)
 
 if (arr[0] != NULL)
 {
-	status = exit_command(arr);
+	status = exit_command(arr, argv);
 	if (status >= 0)
 	return (status);
 	if (env_command(arr, env) == 0)
