@@ -38,7 +38,7 @@ if (arr[0] != NULL)
 		pid = fork();
 		if (pid == 0)
 		{
-			if (execve(arr[0], arr, NULL) == -1)
+			if (execve(arr[0], arr, env) == -1)
 			{
 				exit(EXIT_FAILURE); } }
 		else
