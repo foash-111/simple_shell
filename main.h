@@ -33,6 +33,7 @@ void error_message(char **arr, char **argv);
 void exit_error_message(char **arr, char **argv);
 void print_number(int n);
 
+int comma(char *str, char **argv, char **env);
 
 int env_command(char **arr, char **env);
 

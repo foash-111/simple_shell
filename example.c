@@ -11,30 +11,31 @@ void interactive_mode(char **argv, char **env)
 {
 	size_t in_len = 0;
 	char *str = NULL;
-	int reads_chars, status = 0, temp = 0, i = 0;
+	int reads_chars, status = 0, temp = 0, i = 0, flag = 0;
 
 	while (1)
 	{
 		write(STDOUT_FILENO, "($) ", 4);
-
 	   reads_chars = getline(&str, &in_len, stdin);
-
 		if (reads_chars == -1)
 		{
 		free(str);
-		break;
-		}
+		break; }
 			str[reads_chars - 1] = '\0';
 			while (str[i])
 			{
+				if (str[i] == ';')
+				flag = 1;
 				if (str[i] == '#')
 				{
 					str[i] = ' ';
 					if (str[i + 1] != '\0')
-					str[i + 1] = '#';
-				}
+					str[i + 1] = '#'; }
 				i++; }
-			status = eljoker(str, argv, env);
+				if (flag == 1)
+				{ status = comma(str, argv, env); }
+				else
+				{ status = eljoker(str, argv, env); }
 			if (_strncmp(str, "exit", 4) == 0)
 			{
 				free(str);
@@ -46,8 +47,7 @@ void interactive_mode(char **argv, char **env)
 			}
 			free(str);
 			str = NULL;
-			temp = status;
-	}
+			temp = status; }
 	exit(temp);
 }
 
@@ -61,30 +61,30 @@ void non_interactive_mode(char **argv, char **env)
 {
 	size_t in_len = 0;
 	char *str = NULL;
-	int reads_chars, status = 0, temp = 0, i = 0;
+	int reads_chars, status = 0, temp = 0, i = 0, flag = 0;
 while (1)
 {
 	reads_chars = getline(&str, &in_len, stdin);
-
 	if (reads_chars == -1)
 	{
 		free(str);
-		break;
-	}
+		break; }
 	if (str[reads_chars - 1] == '\n')
 	str[reads_chars - 1] = '\0';
-
-		while (str[i])
-		{
-		if (str[0] == '#' || (str[i] == '#' && str[i - 1] == ' '))
-		{
-		str[i] = ' ';
-		if (str[i + 1] != '\0')
-		str[i + 1] = '#';
-		}
-		i++;
-		}
-	status = eljoker(str, argv, env);
+			while (str[i])
+			{
+				if (str[i] == ';')
+				{ flag = 1; }
+				if (str[i] == '#')
+				{
+					str[i] = ' ';
+					if (str[i + 1] != '\0')
+					str[i + 1] = '#'; }
+				i++; }
+				if (flag == 1)
+				{ status = comma(str, argv, env); }
+				else
+				{ status = eljoker(str, argv, env); }
 			if (_strncmp(str, "exit", 4) == 0)
 			{
 				free(str);
