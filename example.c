@@ -11,7 +11,7 @@ void interactive_mode(char **argv, char **env)
 {
 	size_t in_len = 0;
 	char *str = NULL;
-	int reads_chars, status = 0, temp = 0, i = 0;
+	int reads_chars, status = 0, temp = 0;
 
 	while (1)
 	{
@@ -51,7 +51,7 @@ void non_interactive_mode(char **argv, char **env)
 {
 	size_t in_len = 0;
 	char *str = NULL;
-	int reads_chars, status = 0, temp = 0, i = 0;
+	int reads_chars, status = 0, temp = 0;
 while (1)
 {
 	reads_chars = getline(&str, &in_len, stdin);
