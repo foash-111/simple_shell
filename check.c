@@ -9,6 +9,7 @@ int exit_command(char **arr)
 {
 if (_strcmp(arr[0], "exit") == 0)
 {
+free_all_array(arr);
 return (0);
 }
 return (-1);
