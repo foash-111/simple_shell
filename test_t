@@ -1,6 +1,6 @@
 ls
 pwd
-    /bin/ls
+    /bin/ls ; ls ; exit
 
 pwd
 pwd

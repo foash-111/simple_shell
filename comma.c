@@ -9,10 +9,8 @@
 */
 int comma(char *str, char **argv, char **env)
 {
-int status = 0;
-	char **arr;
-	char *dub, *ptr;
-	int i = 0;
+	int status = 0, i = 0, temp = 0;
+	char **arr, *dub, *ptr;
 
 	dub = _strdup(str);
 	ptr = strtok(str, ";");
@@ -41,6 +39,19 @@ i = 0;
 while (arr[i])
 {
 status = eljoker(arr[i], argv, env);
+	if (_strncmp(arr[i], "exit", 4) == 0)
+		{
+			free_all_array(arr);
+			free(dub);
+			free(str);
+			str = NULL;
+			if ((status != temp) && (status != 0))
+			{
+			temp = status;
+			}
+			exit(temp);
+		}
+		temp = status;
 i++;
 }
 free(dub);
