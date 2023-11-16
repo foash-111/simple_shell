@@ -23,14 +23,6 @@ void interactive_mode(char **argv, char **env)
 		break;
 		}
 			str[reads_chars - 1] = '\0';
-			while (str[i])
-			{
-			if (str[i] == '#' || (str[i] == '#' && str[i - 1] == ' '))
-			{
-			str[i] = ' ';
-			if (str[i + 1] != '\0')
-			str[i + 1] = '#'; }
-			i++; }
 			status = eljoker(str, argv, env);
 			if (_strncmp(str, "exit", 4) == 0)
 			{
@@ -70,14 +62,6 @@ while (1)
 	}
 	if (str[reads_chars - 1] == '\n')
 	str[reads_chars - 1] = '\0';
-			while (str[i])
-			{
-			if (str[0] == '#' || (str[i] == '#' && str[i - 1] == ' '))
-			{
-			str[i] = ' ';
-			if (str[i + 1] != '\0')
-			str[i + 1] = '#'; }
-			i++; }
 		status = eljoker(str, argv, env);
 			if (_strncmp(str, "exit", 4) == 0)
 			{
