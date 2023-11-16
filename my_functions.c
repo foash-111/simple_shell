@@ -7,18 +7,20 @@
  * @argv:  array of pointers to the arguments
  * Retuen: nothing
 */
-void exit_error_message(char **arr, char **argv)
+void exit_error_message(char **arr, char **argv, char *arr1)
 {
 
-	char *error_message, *first_part, *second_part;
+	char *error_message, *first_part, *second_part, *third_part;
 
 	first_part = str_concat(argv[0], ": 1: ");
 	second_part = str_concat(first_part, arr[0]);
-	error_message = str_concat(second_part, ": Illegal number: ");
+	third_part = str_concat(second_part, ": Illegal number: ");
+	error_message = str_concat(third_part, arr1);
 	write(STDERR_FILENO, error_message, _strlen(error_message));
-
+	write(STDERR_FILENO, "\n", 1);
 	free(first_part);
 	free(second_part);
+	free(third_part);
 	free(error_message);
 
 }

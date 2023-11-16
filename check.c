@@ -10,23 +10,24 @@ int exit_command(char **arr, char **argv)
 {
 	int i = 0;
 
-	if (_strcmp(arr[0], "exit") == 0)
+if (_strcmp(arr[0], "exit") == 0)
 {
 
-	if (arr[1] != NULL && arr[2] == NULL)
-	i = _atoi(arr[1]);
-if (i < 0)
+if (arr[1] != NULL && arr[2] == NULL)
 {
-exit_error_message(arr, argv);
-print_number(i);
-_putchar('\n');
+i = _atoi(arr[1]);
+if (_strcmp(arr[1], "0") == 0)
+{ exit(0); }
+else if (i <= 0)
+{
+exit_error_message(arr, argv, arr[1]);
 free_all_array(arr);
-
-	return (2);
+exit(2);
 }
-free_all_array(arr);
+exit(i);
+}
 
-	return (i);
+return (0);
 }
 return (-1);
 }

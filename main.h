@@ -30,7 +30,7 @@ void free_all_array(char **arr);
 extern char **environ;
 
 void error_message(char **arr, char **argv);
-void exit_error_message(char **arr, char **argv);
+void exit_error_message(char **arr, char **argv, char *arr1);
 void print_number(int n);
 
 int comma(char *str, char **argv, char **env);
