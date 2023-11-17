@@ -39,8 +39,6 @@ status = eljoker(arr[i], argv, env);
 		{
 			free_all_array(arr), free(dub), free(str);
 			str = NULL;
-			if ((status != temp) && (status != 0))
-			{ temp = status; }
 			exit(temp);
 		}
 		temp = status, i++;
