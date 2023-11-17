@@ -4,18 +4,20 @@
  * exit_command - exit_command
  * @arr: array of arguments passed from tokanize
  * @argv: array of arguments passed from cmd
+ * @str: string input
  * Return: exit statues or 0 in failure
 */
-int exit_command(char **arr, char **argv)
+int exit_command(char **arr, char **argv, char *str)
 {
 	int i = 0;
 if (_strcmp(arr[0], "exit") == 0)
 {
-if (arr[1])
+if (arr[1] != NULL)
 {
 if (_strcmp(arr[1], "0") == 0)
 {
 free_all_array(arr);
+free(str);
 exit(0);
 }
 else
@@ -24,6 +26,7 @@ i = _atoi(arr[1]);
 if (i > 0)
 {
 free_all_array(arr);
+free(str);
 exit(i);
 }
 else
@@ -33,6 +36,7 @@ else
 	write(STDERR_FILENO, arr[1], _strlen(arr[1]));
 	write(STDERR_FILENO, "\n", 1);
 	free_all_array(arr);
+	free(str);
 	exit(2);
 }
 }

@@ -19,7 +19,7 @@ int eljoker(char *str, char **argv, char **env)
 
 if (arr[0] != NULL)
 {
-	status = exit_command(arr, argv);
+	status = exit_command(arr, argv, str);
 	if (status >= 0)
 	return (status);
 	if (env_command(arr, env) == 0)
@@ -34,6 +34,7 @@ if (arr[0] != NULL)
 	else
 	{
 		free(arr[0]);
+		arr[0] = NULL;
 		arr[0] = _strdup(command_with_path);
 		pid = fork();
 		if (pid == 0)
@@ -46,10 +47,9 @@ if (arr[0] != NULL)
 			 wait(&child_status);
 		if (WIFEXITED(child_status) && WEXITSTATUS(child_status) != 0)
 		{
-			free_all_array(arr), free(command_with_path);
 			return (WEXITSTATUS(child_status)); }
-			free_all_array(arr); }
-	free(command_with_path); } }
+		} }
+					free_all_array(arr), free(command_with_path); }
 	else
 	free_all_array(arr);
 	return (0); }

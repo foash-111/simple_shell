@@ -32,29 +32,31 @@ char *_getenv(const char *name)
 */
 char *complete_path(char *command)
 {
-	char *path;
+	char *path, *copied_command;
 	char *token, *complete_path, *fixed_path;
-	char *copied_path, *check_command = _strdup(command);
+	char *copied_path;
 
 	if (access(command, F_OK) == 0 && (access(command, X_OK) == 0))
-		return (check_command);
-
+	{
+		return (_strdup(command));
+	}
 	path = _getenv("PATH");
 	if (command == NULL || path == NULL)
 	return (NULL);
 
-	copied_path = strdup(path);
-
+	copied_path = _strdup(path);
+	copied_command = _strdup(command);
 	token = strtok(copied_path, ":");
 	while (token)
 	{
 		fixed_path = str_concat(token, "/");
-		complete_path =  str_concat(fixed_path, check_command);
+		complete_path =  str_concat(fixed_path, copied_command);
 		free(fixed_path);
 
 	if (access(complete_path, F_OK) == 0 && access(complete_path, X_OK) == 0)
 		{
 		free(copied_path);
+		free(copied_command);
 		return (complete_path);
 		}
 		else
@@ -66,6 +68,6 @@ char *complete_path(char *command)
 	}
 
 free(copied_path);
-free(check_command);
+free(copied_command);
 return (NULL);
 }
